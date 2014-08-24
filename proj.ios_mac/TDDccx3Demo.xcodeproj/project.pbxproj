@@ -52,6 +52,7 @@
 		50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF629517ECD46A001EB2F8 /* Icon-100.png */; };
 		50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF62A017ECD613001EB2F8 /* Icon-29.png */; };
 		50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF62A117ECD613001EB2F8 /* Icon-50.png */; };
+		73915D7E19AA5B6B00ABC4DE /* Marker Felt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 73915D7D19AA5B6B00ABC4DE /* Marker Felt.ttf */; };
 		73D9062A19A6575700DF733C /* libbox2d iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 73D9062719A6573300DF733C /* libbox2d iOS.a */; };
 		73D9062B19A6575D00DF733C /* libchipmunk iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 73D9062519A6573300DF733C /* libchipmunk iOS.a */; };
 		73D9062C19A6576200DF733C /* libcocos2dx iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 73D9062119A6573300DF733C /* libcocos2dx iOS.a */; };
@@ -204,6 +205,7 @@
 		50EF629517ECD46A001EB2F8 /* Icon-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-100.png"; sourceTree = "<group>"; };
 		50EF62A017ECD613001EB2F8 /* Icon-29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-29.png"; sourceTree = "<group>"; };
 		50EF62A117ECD613001EB2F8 /* Icon-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-50.png"; sourceTree = "<group>"; };
+		73915D7D19AA5B6B00ABC4DE /* Marker Felt.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Marker Felt.ttf"; sourceTree = "<group>"; };
 		73D9060519A6573300DF733C /* cocos2d_libs.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_libs.xcodeproj; path = ../../../engine/build/cocos2d_libs.xcodeproj; sourceTree = "<group>"; };
 		73D9063019A65A8500DF733C /* ExampleTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ExampleTest.cpp; sourceTree = "<group>"; };
 		73D9063119A65A8500DF733C /* ExampleTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleTest.h; sourceTree = "<group>"; };
@@ -402,6 +404,14 @@
 			path = ios;
 			sourceTree = SOURCE_ROOT;
 		};
+		73915D7C19AA5B6B00ABC4DE /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				73915D7D19AA5B6B00ABC4DE /* Marker Felt.ttf */,
+			);
+			path = fonts;
+			sourceTree = "<group>";
+		};
 		73D9060619A6573300DF733C /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -463,6 +473,7 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				73915D7C19AA5B6B00ABC4DE /* fonts */,
 				1AFAF8B916D35E4900DB1158 /* CloseNormal.png */,
 				1AFAF8BA16D35E4900DB1158 /* CloseSelected.png */,
 				1AFAF8BB16D35E4900DB1158 /* HelloWorld.png */,
@@ -629,6 +640,7 @@
 				5087E78617EB970100C73F5D /* Icon-76.png in Resources */,
 				5087E77F17EB970100C73F5D /* Default@2x.png in Resources */,
 				50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */,
+				73915D7E19AA5B6B00ABC4DE /* Marker Felt.ttf in Resources */,
 				1AFAF8BC16D35E4900DB1158 /* CloseNormal.png in Resources */,
 				5087E78317EB970100C73F5D /* Icon-152.png in Resources */,
 				5087E77D17EB970100C73F5D /* Default-568h@2x.png in Resources */,

@@ -13,15 +13,15 @@
 #define VERSION			"1.0.0"
 #define BUILD			1
 
-#define TDD_FONT_NAME	"GillSans"
-//#define TDD_FONT_NAME	"Helvetica"
+//#define TDD_FONT_NAME	"GillSans"
+#define TDD_FONT_NAME	"Helvetica"
 //#define TDD_FONT_NAME	"Courier"
 //#define TDD_FONT_SIZE1	20
 //#define TDD_FONT_SIZE2	15
 //#define TDD_FONT_SIZE3	13
-#define TDD_FONT_SIZE1	23
-#define TDD_FONT_SIZE2	16
-#define TDD_FONT_SIZE3	15
+#define TDD_FONT_SIZE1	27
+#define TDD_FONT_SIZE2	18
+#define TDD_FONT_SIZE3	16
 
 
 // Color
