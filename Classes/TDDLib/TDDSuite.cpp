@@ -65,11 +65,11 @@ TDDSuiteScene::~TDDSuiteScene()
 
 void TDDSuiteScene::onEnter()
 {
-	log("TDDSuiteScene: onEnter");
+	//log("TDDSuiteScene: onEnter");
 
 	Scene::onEnter();
 	
-	log("TDDSuiteScene: onEnter is called");
+	//log("TDDSuiteScene: onEnter is called");
 	
 	TDDSuiteLayer *layer = new TDDSuiteLayer();
 	addChild(layer);
@@ -83,7 +83,7 @@ void TDDSuiteScene::onEnter()
 
 void TDDSuiteScene::onExit()
 {
-	log("TDDSuiteScene: onExit");
+	//log("TDDSuiteScene: onExit");
 	this->removeAllChildren();
 	
 	Director::getInstance()->setDisplayStats(hasStat);
@@ -126,7 +126,7 @@ TDDSuiteLayer::~TDDSuiteLayer()
 
 void TDDSuiteLayer::clearHistory(Ref * sender)
 {
-	log("clearHistory");
+	//log("clearHistory");
 	TDDData::instance()->clearHistory();
 	
 	setDisplayTestWithHistory();
@@ -135,13 +135,13 @@ void TDDSuiteLayer::clearHistory(Ref * sender)
 
 void TDDSuiteLayer::goBack(Ref * sender)
 {
-	log("goback to main");
+	//log("goback to main");
 	Director::getInstance()->popToRootScene();
 }
 
 void TDDSuiteLayer::filterTest(Ref * sender)
 {
-	log("filterTest");
+	//log("filterTest");
 	
 	const char *pattern = (mEditFilter == NULL) ? "" : mEditFilter->getText();
 	
@@ -166,7 +166,7 @@ void TDDSuiteLayer::filterTest(Ref * sender)
 Layer *TDDSuiteLayer::createToolBarLayer()
 {
 	float scale = TDDHelper::getBestScale();
-	bool isLandscape = TDDHelper::isLandscape();
+	// bool isLandscape = TDDHelper::isLandscape();
 	Size screenSize = TDDHelper::getScreenSize();
 	int midY = kToolBarHeight/2;
 	
@@ -336,8 +336,8 @@ void TDDSuiteLayer::setupTestMenu()
 	Size screenSize = TDDHelper::getScreenSize();
 	Size menuSize = Size(screenSize.width, screenSize.height - kToolBarHeight);
 	
-	log("DEBUG: screenSize=%f,%f menuSize=%f,%f", screenSize.width, screenSize.height,
-		menuSize.width, menuSize.height);
+	//log("DEBUG: screenSize=%f,%f menuSize=%f,%f", screenSize.width, screenSize.height,
+	//	menuSize.width, menuSize.height);
 	
 	TDDMenu *menu = new TDDMenu(menuSize, kColorTestMenu, kLineHeight);
 	this->addChild(menu);
@@ -421,7 +421,7 @@ void TDDSuiteLayer::refreshTestMenu()
 #pragma mark EditBoxDelegate
 void TDDSuiteLayer::editBoxTextChanged(cocos2d::extension::EditBox* editBox, const std::string& text)
 {
-	log("editBox change to [%s]", text.c_str());
+	//log("editBox change to [%s]", text.c_str());
 	
 	filterTest(NULL);
 }
@@ -549,15 +549,15 @@ std::string TDDSuiteLayer::getDisplayTestNameByIndex(int index)
 
 void TDDSuiteLayer::menuCallback(Ref * sender)
 {
-	log("menuCallback: is called");
+	//log("menuCallback: is called");
 	MenuItem *item = dynamic_cast<MenuItem *>(sender);
 	
 	std::string testName = getDisplayTestNameByIndex(item->getTag());
-	log("item tag=%d %s", item->getTag(), testName.c_str());
+	//log("item tag=%d %s", item->getTag(), testName.c_str());
 	
 	int testIdx = getTestIndexByName(testName);
 	if(testIdx < 0) {
-		log("Cannot find the test!");
+		log("Cannot find the test! name=%s", testName.c_str());
 		return;
 	}
 	

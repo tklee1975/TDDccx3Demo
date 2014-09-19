@@ -11,6 +11,7 @@
 // Add the Header here!
 #include "ExampleTest.h"
 #include "FontTest.h"
+#include "SpriteTest.h"
 
 //#include#
 // NOTE!!! The above line is used to generate new unit test, must not be removed.
@@ -19,7 +20,8 @@
 TDD_CASES
 {
 	TEST(ExampleTest),
-	TEST(FontTest), 
+	TEST(FontTest),
+	TEST(SpriteTest),
 //#testcase#
 // NOTE!!! The above line is used to generate new unit test, must not be removed.
 };

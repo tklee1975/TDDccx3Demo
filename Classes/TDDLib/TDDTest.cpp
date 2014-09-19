@@ -12,6 +12,7 @@
 #include "TDDHelper.h"
 #include "TDDMenu.h"
 #include "TDDConstant.h"
+#include "TDDSubMenu.h"
 
 #include <string>
 
@@ -92,16 +93,10 @@ void TDDTest::setupGUI()
 	setupControlLayer();
 }
 
-//void TDDTest::backToTestSuite()
-//{
-//	
-//}
 
 void TDDTest::setUp()
 {
 	log("TDDTest::setUp is called");
-	
-//	LabelTTF *label = LabelTTF::create("Please code something!!", kDefaultFont, kDefaultFontSize);
 
 	char tempStr[200];
 	sprintf(tempStr, "Enjoy the Test Driven Development!\n(%s %s)",
@@ -151,7 +146,7 @@ void TDDTest::addSubTestMenu(Vector<MenuItem *> &menuArray, const char *name, co
 	// trim the "prefix before ::"
 	std::string trimName;
 	removeNameSpace(name, trimName);
-	log("DEBUG: addSubTestMenu: %s", trimName.c_str());
+	//log("DEBUG: addSubTestMenu: %s", trimName.c_str());
 	
 	// Create menu and add it!!
 	MenuItem *menuItem = TDDHelper::createMenuItem(trimName.c_str(), callback);
@@ -181,25 +176,19 @@ void TDDTest::setSubTest(Vector<MenuItem *> &menuArray)
 #pragma mark GUI
 Menu *TDDTest::createBackMenu()
 {
-	float scale = TDDHelper::getBestScale();
-	int fontSize = (int)(scale * TDD_FONT_SIZE1);
-	auto label = LabelTTF::create("Back", TDD_FONT_NAME, fontSize);
-
-	
-	MenuItemLabel *menuItem = MenuItemLabel::create(label,
-										  [](Ref *sender) {
-											  log("createBackMenu: called");
-											  Director::getInstance()->popScene();
-										  }
-										  );
-	
-	Menu *menu = Menu::create(menuItem, NULL);
+	Point pos = Point(0, 0);
+	Menu *menu = TDDHelper::createMenu(pos, "Back", CC_CALLBACK_1(TDDTest::backToSuite, this));
 	return menu;
+}
+
+void TDDTest::backToSuite(Ref *sender)
+{
+	Director::getInstance()->popScene();
 }
 
 void TDDTest::toggleMenu(Ref *sender)
 {
-	log("TODO: Show/Hide the menu");
+	//log("TODO: Show/Hide the menu");
 	MenuItemLabel *menuItem = static_cast<MenuItemLabel *>(sender);
 	if(menuItem == NULL) {
 		log("toggleMenu: menuItem is NULL");
@@ -228,15 +217,9 @@ void TDDTest::setMenuVisible(bool flag)
 
 Menu *TDDTest::createToggleMenu()
 {
-	float scale = TDDHelper::getBestScale();
-	int fontSize = (int)(scale * TDD_FONT_SIZE1);
-	auto label = LabelTTF::create("Menu", TDD_FONT_NAME, fontSize);
-	
-	MenuItemLabel *menuItem = MenuItemLabel::create(label, CC_CALLBACK_1(TDDTest::toggleMenu, this));
-	
-	setMenuVisible(true);		// default is true
-	
-	Menu *menu = Menu::create(menuItem, NULL);
+	Point pos = Point(0, 0);
+	Menu *menu = TDDHelper::createMenu(pos, "Menu", CC_CALLBACK_1(TDDTest::toggleMenu, this));
+	setMenuVisible(true);
 	return menu;
 }
 
@@ -248,17 +231,9 @@ void TDDTest::setBackgroundColor(const Color3B &color)
 	
 }
 
-void TDDTest::setupControlLayer()
+void TDDTest::setupToolbar(Layer *parent)
 {
-	Size screenSize = TDDHelper::getScreenSize();	// assume the control layer same size as the parent layer
-	
-	// Background Layer
-	mBackLayer = LayerColor::create(Color4B::GRAY, screenSize.width, screenSize.height);
-	addChild(mBackLayer);
-	
-	//
-	Layer *layer = Layer::create();
-	layer->setContentSize(screenSize);
+	Size screenSize = TDDHelper::getScreenSize();
 	
 	// Add the Menu
 	TDDMenu *menu = createTDDMenu();		// autorelease
@@ -268,17 +243,66 @@ void TDDTest::setupControlLayer()
 		float x = screenSize.width - menuSize.width;
 		Point point = Director::getInstance()->convertToGL(Point(x, y));	//TDDHelper::getCenter(screenSize, menuSize);
 		menu->setPosition(point);
-		layer->addChild(menu);
+		parent->addChild(menu);
 	}
 	mTDDMenu = menu;
 	bool hasMenu = mTDDMenu != NULL;
-
+	
 	// Add the toolbar
 	LayerColor *toolBarLayer = createToolBarLayer(hasMenu);
 	Point toolBarPos = Director::getInstance()->convertToGL(Point(0, kToolBarHeight));
 	toolBarLayer->setPosition(toolBarPos);
-	layer->addChild(toolBarLayer);
+	parent->addChild(toolBarLayer);
 	mToolBarLayer = toolBarLayer;
+}
+
+void TDDTest::setupSubMenu(Layer *parent)
+{
+	Size screenSize = TDDHelper::getScreenSize();
+	
+	Size size = Size(200, screenSize.height / 2);
+	Point pos = Point(screenSize.width - size.width, screenSize.height - size.height);
+	
+	TDDSubMenu *menu = new TDDSubMenu(size);
+	menu->setPosition(pos);
+	
+	parent->addChild(menu);
+	
+	Vector<MenuItem *> menuArray;
+
+	addToggleStatMenuItem(menuArray);
+	setSubTest(menuArray);
+	
+	menu->setBackAction(this, cccontrol_selector(TDDTest::onBackPressed));
+	menu->setSubTest(menuArray);
+}
+
+void TDDTest::addToggleStatMenuItem(Vector<MenuItem *> &menuArray)
+{
+	SUBTEST(TDDTest::toggleStat);
+}
+
+void TDDTest::onBackPressed(Ref *sender, Control::EventType controlEvent)
+{
+	log("onBackPressed: is called");
+	backToSuite(this);
+}
+
+
+
+void TDDTest::setupControlLayer()
+{
+	Size screenSize = TDDHelper::getScreenSize();	// assume the control layer same size as the parent layer
+	
+	// Background Layer
+	mBackLayer = LayerColor::create(Color4B::GRAY, screenSize.width, screenSize.height);
+	addChild(mBackLayer);
+	
+	// Control Layer
+	Layer *layer = Layer::create();
+	layer->setContentSize(screenSize);
+	
+	setupSubMenu(layer);
 		
 	// Add to scene
 	this->addChild(layer, kZOrderControlLayer);

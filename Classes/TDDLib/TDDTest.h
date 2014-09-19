@@ -59,11 +59,17 @@ private:
 	Menu *createBackMenu();
 	Menu *createToggleMenu();
 	
+	
 	void setupControlLayer();
+	void setupSubMenu(Layer *parent);		// New UI 
+	void setupToolbar(Layer *parent);		// Old UI
 	LayerColor *createToolBarLayer(bool hasMenu);
 	TDDMenu *createTDDMenu();
 	void toggleMenu(Ref *sender);
 	void toggleStat(Ref *sender);
+	void backToSuite(Ref *sender);
+	void addToggleStatMenuItem(Vector<MenuItem *> &menuArray);
+	void onBackPressed(Ref *sender, Control::EventType controlEvent);
 	
 // private data
 private:
